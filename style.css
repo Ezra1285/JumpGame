@@ -1,0 +1,61 @@
+ body {
+     margin: 0px;
+    background-image: url(images/4907157.jpg);
+} 
+#game{
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+    margin: auto;
+    background-image: url(/images/jungleBackground.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+   
+}
+
+
+#character{
+    width: 20px;
+    height: 50px;
+    /* background-color: red; */
+    position: relative;
+    top: 150px;
+}
+#character img {
+    flex-shrink: 0;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+#block{
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    position: relative;
+    top: 130px;
+    left: 480px;
+    animation: block 1s infinite linear;
+}
+block img {
+    flex-shrink: 0;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+@keyframes jump {
+    0%{top: 150px;}
+    30%{top: 100px;}
+    70%{top: 100px;}
+    100%{top: 150px;}
+
+}
+
+@keyframes block {
+    0%{left: 500px}
+    100%{left: -20px}
+}
+
+.animate{
+    animation: jump 300ms linear;
+}
+
