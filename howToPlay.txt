@@ -1,0 +1,4 @@
+1. Click "Start Game" to have the block start moving towards your character.
+2. Left click your mouse to jump over the block.
+3. Stay alive as long as possible.
+- Click "Update Score" to see your high score!
