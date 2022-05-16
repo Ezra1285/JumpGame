@@ -4,6 +4,7 @@ document.addEventListener("click", jump);
 var isGamePlaying = 0; // 0 for when the game if off and 1 when the game is on.
 var totalScore = 0;
 var highScoreList = [];
+var isScoreCountedAlready = false;
 
 var startButton = document.getElementById("startButton");
 startButton.onclick = function () {
@@ -24,8 +25,8 @@ function checkDead() {
     block.classList.remove("startGame");
     console.log(totalScore);
     highScoreList.push(totalScore);
+    alert("Game over\n" + "Score: " + totalScore);
     totalScore = 0;
-    alert("Game over");
   }
 }
 
@@ -46,6 +47,7 @@ function jump() {
   } // Check if the user is already jumping
 
   character.classList.add("animate");
+  isScoreCountedAlready = false;
   setTimeout(removeJump, 300); // 300ms = length of animation
 }
 function removeJump() {
@@ -58,7 +60,6 @@ Counting the players score.
 
 //  Get blocks left position and check if it is passed
 function countScore() {
-  let isScoreCountedAlready = false;
   let blockLeft = parseInt(
     window.getComputedStyle(block).getPropertyValue("left")
   );
@@ -90,28 +91,18 @@ function updateScoreBoard() {
   let tableElements = document.querySelector("#leaderBoard");
   let scoreElements = document.getElementsByClassName(".score");
 
-  //  Add each element(score) to the array
-  tableElements.querySelectorAll(".score").forEach((el) => scoreList.push(el));
-
-  //  Clear our table or the previous scores
-  for (let i = 0; i < scoreList.length; i++) {
-    console.log("Beep" + scoreList[i].innerHTML);
-  }
-  //  Sort the array for to reinsert it into the table
-  let sortedScoreList = scoreList.sort(function (a, b) {
-    console.log("Testing:" + parseInt(a, 10) + parseInt(b, 10));
+  highScoreList.sort(function (a, b) {
     return a - b;
   });
+  highScoreList.reverse();
 
-  for (let i = 0; i < sortedScoreList.length; i++) {
-    console.log(sortedScoreList[i]);
-    console.log("Test");
-  }
-  //  Re-add elements to the table
-  // sortedScoreList.forEach((e) => tableElements.appendChild(e));
   let myTable = document.getElementById("leaderBoard").rows;
   for (let i = 1; i < 4; i++) {
     let y = myTable[i].cells;
-    y[1].innerHTML = highScoreList[i];
+    if (typeof highScoreList[i - 1] == "undefined") {
+      y[1].innerHTML = 0;
+    } else {
+      y[1].innerHTML = highScoreList[i - 1];
+    }
   }
 }
